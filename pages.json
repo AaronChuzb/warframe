@@ -1,0 +1,46 @@
+{
+  "pages": [{
+    "path": "pages/index/index",
+    "style": {
+      "app-plus": {
+        "bounce": "none"
+      },
+      "navigationBarTitleText": "遗物搜索"
+    }
+  }, {
+    "path": "pages/mine/mine",
+    "style": {
+      "app-plus": {
+        "bounce": "none"
+      },
+      "navigationBarTitleText": "设置关于"
+    }
+
+  }],
+  "easycom": {
+    "^u-(.*)": "uview-ui/components/u-$1/u-$1.vue"
+  },
+  "tabBar": {
+    "color": "#ccc",
+    "selectedColor": "#2c2c2c",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [{
+      "pagePath": "pages/index/index",
+      "iconPath": "static/tabbar/frame-line.png",
+      "selectedIconPath": "static/tabbar/frame-fill.png",
+      "text": "遗物搜索"
+    }, {
+      "pagePath": "pages/mine/mine",
+      "iconPath": "static/tabbar/user-set-line.png",
+      "selectedIconPath": "static/tabbar/user-set-fill.png",
+      "text": "设置关于"
+    }]
+  },
+  "globalStyle": {
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "战甲秘典",
+    "navigationBarBackgroundColor": "#383838",
+    "backgroundColor": "#F2F2F2"
+  }
+}
