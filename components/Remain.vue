@@ -1,7 +1,7 @@
 <!--
  * @Date: 2021-09-22 11:40:40
  * @LastEditors: AaronChu
- * @LastEditTime: 2021-09-22 14:33:47
+ * @LastEditTime: 2021-09-22 17:42:16
 -->
 <template>
   <uni-transition mode-class="slide-bottom" :show="true">
@@ -49,15 +49,17 @@ export default {
   },
   computed: {
     partList() {
-      this.part[0].children[0] = this.pageData.copper_1
-      this.part[0].children[1] = this.pageData.copper_2
-      this.part[0].children[2] = this.pageData.copper_3
-      this.part[1].children[0] = this.pageData.silver_1
-      this.part[1].children[1] = this.pageData.silver_2
-      this.part[2].children[0] = this.pageData.gold
-      this.$nextTick(() => {
-          this.$refs.collapse.resize()
-      })
+      if(this.part[0].children.length === 0){
+        this.part[0].children[0] = this.pageData.copper_1
+        this.part[0].children[1] = this.pageData.copper_2
+        this.part[0].children[2] = this.pageData.copper_3
+        this.part[1].children[0] = this.pageData.silver_1
+        this.part[1].children[1] = this.pageData.silver_2
+        this.part[2].children[0] = this.pageData.gold
+        this.$nextTick(() => {
+            this.$refs.collapse.resize()
+        })
+      }
       return this.part
     },
   },
