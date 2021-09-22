@@ -1,7 +1,7 @@
 <!--
  * @Date: 2021-09-20 17:58:56
  * @LastEditors: AaronChu
- * @LastEditTime: 2021-09-22 18:31:40
+ * @LastEditTime: 2021-09-23 00:52:32
 -->
 <template>
   <view class="page">
@@ -27,7 +27,11 @@
             <u-cell-item icon="list-dot" title="遗物部件折叠默认打开显示" :arrow="false">
               <u-switch slot="right-icon" v-model="collapse" @change="setCollapse"></u-switch>
             </u-cell-item>
-            <u-cell-item icon="integral-fill" title="会员等级" value="新版本"></u-cell-item>
+            <u-cell-item icon="chat" title="意见反馈"  @click="navPage(1)"></u-cell-item>
+            <u-cell-item icon="thumb-up" title="鸣谢名单"  @click="navPage(2)"></u-cell-item>
+            <u-cell-item icon="grid" title="数据来源"  @click="navPage(3)"></u-cell-item>
+            <u-cell-item icon="clock" title="计划日志"  @click="navPage(4)"></u-cell-item>
+            <u-cell-item icon="gift" title="赞赏支持"  @click="navPage(5)"></u-cell-item>
           </u-cell-group>
         </view>
       </view>
@@ -48,6 +52,12 @@ export default {
      */
     setCollapse(){
       uni.setStorageSync('collapse', this.collapse)
+    },
+    navPage(index){
+      console.log(index)
+      if(index == 1){
+        uni.navigateTo({ url: '/pages/suggest/suggest' })
+      }
     }
   }
 }
@@ -55,7 +65,12 @@ export default {
 
 <style lang="scss" scoped>
 .header {
+  background-image: url('/static/mine_bg.jpg');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  height: 442rpx;
   width: 750rpx;
+  padding-top: 150rpx;
   .avatar {
     text-align: center;
     margin: 0 auto;
@@ -75,7 +90,7 @@ export default {
 .content {
   .card {
     width: 710rpx;
-    margin: 0 auto;
+    margin: 32rpx auto 0;
     border-radius: 16rpx;
     background: #fff;
     overflow: hidden;

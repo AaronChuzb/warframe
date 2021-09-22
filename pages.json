@@ -16,6 +16,16 @@
       "navigationBarTitleText": "设置关于"
     }
 
+  }, {
+    "path": "pages/suggest/suggest",
+    "style": {
+      "app-plus": {
+        "bounce": "none"
+      },
+      "navigationBarTitleText": "",
+      "enablePullDownRefresh": false
+    }
+
   }],
   "easycom": {
     "^u-(.*)": "uview-ui/components/u-$1/u-$1.vue"
