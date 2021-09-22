@@ -1,14 +1,14 @@
 <!--
  * @Date: 2021-09-20 01:55:52
  * @LastEditors: AaronChu
- * @LastEditTime: 2021-09-22 14:37:22
+ * @LastEditTime: 2021-09-22 17:54:03
 -->
 <template>
   <view class="page">
     <z-paging ref="paging" v-model="dataList" @query="getData" :default-page-size="5" :auto-show-back-to-top="true" :refresher-end-bounce-enabled="true" :refresher-complete-delay="300">
       <view class="options" slot="top">
         <view class="search">
-          <u-search placeholder="根据遗物或部件名称搜索" v-model="keyword" :clearabled="true" :show-action="true" action-text="搜索" @custom="$refs.paging.reload()" @search="$refs.paging.reload()" :animation="false"></u-search>
+          <u-search placeholder="根据遗物或部件名称搜索" v-model="keyword" :clearabled="true" :show-action="true" action-text="搜索" @custom="searchList" @search="searchList" :animation="false"></u-search>
         </view>
         <view class="search" style="margin-top: 15rpx">
           <u-subsection :list="list" :current="0" @change="typeChange"></u-subsection>
@@ -39,6 +39,7 @@ export default {
       ],
       type: '',
       keyword: '',
+      temp: ['','']
     }
   },
   async onLoad() {
@@ -55,7 +56,20 @@ export default {
     typeChange(e) {
       console.log(e)
       this.type = this.list[e]._id
-      this.$refs.paging.reload()
+      // 添加延时函数解决卡顿问题
+      setTimeout(()=>{
+        this.$refs.paging.reload()
+      }, 300)
+    },
+    async searchList(){
+      // 搜索前判断字符串改变或者类型改变，减少不必要的请求。
+      // 进行对比，满足一项条件才进行请求。
+      if(this.temp[0] != this.keyword || this.temp[1] != this.type){
+        await this.$refs.paging.reload()
+        // 将当前的信息存入,第二次请求如果未变化的话直接拒绝请求
+        this.temp[0] = this.keyword
+        this.temp[1] = this.type
+      }
     },
     async getData(pageNo, pageSize) {
       console.log(pageNo, pageSize)
