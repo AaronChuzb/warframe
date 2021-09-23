@@ -1,21 +1,20 @@
 <!--
  * @Date: 2021-09-20 01:55:52
  * @LastEditors: AaronChu
- * @LastEditTime: 2021-09-20 23:35:28
+ * @LastEditTime: 2021-09-23 15:28:02
 -->
 
 <script>
 import { type } from './api/index'
 export default {
   onLaunch: async function () {
-    console.log('App Launch')
-    // 获取分类数据
+    uni.setStorageSync('collapse', true)
   },
   onShow: function () {
-    console.log('App Show')
+    
   },
   onHide: function () {
-    console.log('App Hide')
+    
   },
 }
 </script>

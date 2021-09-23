@@ -55,7 +55,11 @@
             "urlCheck" : true,
             "minified" : true
         },
-        "usingComponents" : true
+        "usingComponents" : true,
+        "permission" : {},
+        "uniStatistics" : {
+            "enable" : true
+        }
     },
     "mp-alipay" : {
         "usingComponents" : true
@@ -68,5 +72,15 @@
     },
     "uniStatistics" : {
         "enable" : false
+    },
+    "mp-qq" : {
+        "appid" : "1110486685",
+        "setting" : {
+            "minified" : true,
+            "postcss" : true
+        },
+        "uniStatistics" : {
+            "enable" : true
+        }
     }
 }

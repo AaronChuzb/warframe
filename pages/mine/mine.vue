@@ -1,14 +1,14 @@
 <!--
  * @Date: 2021-09-20 17:58:56
  * @LastEditors: AaronChu
- * @LastEditTime: 2021-09-23 00:52:32
+ * @LastEditTime: 2021-09-23 18:21:19
 -->
 <template>
   <view class="page">
     <scroll-view scroll-y style="height: 100vh">
       <view class="header">
         <view class="avatar">
-          <u-avatar src="/static/ls.png" size="large"></u-avatar>
+          <u-avatar src="/static/logo.png" size="150"></u-avatar>
         </view>
       </view>
       <view class="bar">
@@ -24,14 +24,14 @@
       <view class="content">
         <view class="card">
           <u-cell-group>
-            <u-cell-item icon="list-dot" title="遗物部件折叠默认打开显示" :arrow="false">
+            <u-cell-item icon="list-dot" title="遗物部件默认折叠" :arrow="false">
               <u-switch slot="right-icon" v-model="collapse" @change="setCollapse"></u-switch>
             </u-cell-item>
-            <u-cell-item icon="chat" title="意见反馈"  @click="navPage(1)"></u-cell-item>
-            <u-cell-item icon="thumb-up" title="鸣谢名单"  @click="navPage(2)"></u-cell-item>
-            <u-cell-item icon="grid" title="数据来源"  @click="navPage(3)"></u-cell-item>
-            <u-cell-item icon="clock" title="计划日志"  @click="navPage(4)"></u-cell-item>
-            <u-cell-item icon="gift" title="赞赏支持"  @click="navPage(5)"></u-cell-item>
+            <u-cell-item icon="chat" title="问题反馈"  @click="navPage(0)"></u-cell-item>
+            <u-cell-item icon="thumb-up" title="鸣谢名单"  @click="navPage(1)"></u-cell-item>
+            <u-cell-item icon="grid" title="数据来源"  @click="navPage(2)"></u-cell-item>
+            <u-cell-item icon="clock" title="计划日志"  @click="navPage(3)"></u-cell-item>
+            <!-- <u-cell-item icon="gift" title="赞赏支持"  @click="navPage(4)"></u-cell-item> -->
           </u-cell-group>
         </view>
       </view>
@@ -43,21 +43,24 @@
 export default {
   data() {
     return {
-      collapse: false
+      collapse: false,
+      navList: [
+        '/pages/suggest/suggest',
+        '/pages/acknowledgement/acknowledgement',
+        '/pages/about/about',
+        '/pages/logs/logs',
+      ]
     }
   },
   methods:{
     /**
      * @description: 设置折叠面板默认显示
      */
-    setCollapse(){
-      uni.setStorageSync('collapse', this.collapse)
+    setCollapse(e){
+      uni.setStorageSync('collapse', !this.collapse)
     },
     navPage(index){
-      console.log(index)
-      if(index == 1){
-        uni.navigateTo({ url: '/pages/suggest/suggest' })
-      }
+      uni.navigateTo({ url: this.navList[index] })
     }
   }
 }

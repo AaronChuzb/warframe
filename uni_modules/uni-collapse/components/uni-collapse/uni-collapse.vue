@@ -101,6 +101,7 @@
 			},
 			resize() {
 				this.childrens.forEach((vm, index) => {
+          vm.getCollapseHeight()
 					// #ifndef APP-NVUE
 					vm.getCollapseHeight()
 					// #endif

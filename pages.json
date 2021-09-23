@@ -22,10 +22,36 @@
       "app-plus": {
         "bounce": "none"
       },
-      "navigationBarTitleText": "",
+      "navigationBarTitleText": "问题反馈",
       "enablePullDownRefresh": false
     }
-
+  }, {
+    "path": "pages/acknowledgement/acknowledgement",
+    "style": {
+      "app-plus": {
+        "bounce": "none"
+      },
+      "navigationBarTitleText": "鸣谢名单",
+      "enablePullDownRefresh": false
+    }
+  }, {
+    "path": "pages/about/about",
+    "style": {
+      "app-plus": {
+        "bounce": "none"
+      },
+      "navigationBarTitleText": "数据来源",
+      "enablePullDownRefresh": false
+    }
+  }, {
+    "path": "pages/logs/logs",
+    "style": {
+      "app-plus": {
+        "bounce": "none"
+      },
+      "navigationBarTitleText": "计划日志",
+      "enablePullDownRefresh": false
+    }
   }],
   "easycom": {
     "^u-(.*)": "uview-ui/components/u-$1/u-$1.vue"

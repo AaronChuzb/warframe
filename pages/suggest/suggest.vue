@@ -1,7 +1,7 @@
 <!--
  * @Date: 2021-09-23 00:49:13
  * @LastEditors: AaronChu
- * @LastEditTime: 2021-09-23 01:20:46
+ * @LastEditTime: 2021-09-23 10:13:02
 -->
 <template>
   <view class="page">
@@ -47,6 +47,8 @@ export default {
   display: flex;
   align-items: center;
   height: 100rpx;
+  width: 710rpx;
+  margin: 0 auto;
 }
 .textarea {
   width: 710rpx;

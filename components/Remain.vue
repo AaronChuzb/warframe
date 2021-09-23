@@ -1,25 +1,40 @@
 <!--
  * @Date: 2021-09-22 11:40:40
  * @LastEditors: AaronChu
- * @LastEditTime: 2021-09-22 17:42:16
+ * @LastEditTime: 2021-09-23 14:38:27
 -->
 <template>
   <uni-transition mode-class="slide-bottom" :show="true">
     <u-card :thumb="transImg(pageData.type.name)" :border="false" :foot-border-top="false" :title="pageData.name" :sub-title="pageData.stock ? '已入库' : ''">
       <view slot="body">
+        <!-- <view class="part" v-for="(item, index) in partList" :key="index" style="margin-bottom: 15rpx">
+          <view class="title">
+            <image :src="item.img" mode="widthFix" style="margin-bottom: 5rpx" />
+            <view :style="{ color: item.color }">{{ item.title }}</view>
+          </view>
+          <view v-for="child in item.children" :key="child.name">
+            <view class="item">
+              <view class="name">{{ child.name }}</view>
+              <view class="price" v-if="child.price != 0">
+                <view :style="{ color: item.color }">{{ child.price }}</view>
+                <image src="/static/bi.png" mode="widthFix" />
+              </view>
+            </view>
+          </view>
+        </view> -->
         <uni-collapse ref="collapse">
-          <uni-collapse-item :name="index" :show-animation="true" :open="true" title-border="none" :border="false" v-for="(item, index) in partList" :key="index" style="margin-bottom: 15rpx;">
+          <uni-collapse-item :name="index" :show-animation="true" :open="open" title-border="none" :border="false" v-for="(item, index) in partList" :key="index" style="margin-bottom: 15rpx">
             <template v-slot:title>
               <view class="title">
                 <image :src="item.img" mode="widthFix" style="margin-bottom: 5rpx" />
-                <view :style="{color: item.color}">{{ item.title }}</view>
+                <view :style="{ color: item.color }">{{ item.title }}</view>
               </view>
             </template>
-            <view v-for="(child) in item.children" :key="child.name">
+            <view v-for="child in item.children" :key="child.name">
               <view class="item">
                 <view class="name">{{ child.name }}</view>
                 <view class="price" v-if="child.price != 0">
-                  <view :style="{color: item.color}">{{ child.price }}</view>
+                  <view :style="{ color: item.color }">{{ child.price }}</view>
                   <image src="/static/bi.png" mode="widthFix" />
                 </view>
               </view>
@@ -27,6 +42,7 @@
           </uni-collapse-item>
         </uni-collapse>
       </view>
+      <view slot="foot"><u-section title="贡献人：" sub-title="查看遗物详细"></u-section></view>
     </u-card>
   </uni-transition>
 </template>
@@ -40,6 +56,7 @@ export default {
   },
   data() {
     return {
+      open: uni.getStorageSync('collapse'),
       part: [
         { title: '普通', color: '#846251', img: '/static/copper.png', children: [] },
         { title: '精良', color: '#cdcbcd', img: '/static/silver.png', children: [] },
@@ -49,17 +66,15 @@ export default {
   },
   computed: {
     partList() {
-      if(this.part[0].children.length === 0){
-        this.part[0].children[0] = this.pageData.copper_1
-        this.part[0].children[1] = this.pageData.copper_2
-        this.part[0].children[2] = this.pageData.copper_3
-        this.part[1].children[0] = this.pageData.silver_1
-        this.part[1].children[1] = this.pageData.silver_2
-        this.part[2].children[0] = this.pageData.gold
-        this.$nextTick(() => {
-            this.$refs.collapse.resize()
-        })
-      }
+      this.part[0].children[0] = this.pageData.copper_1
+      this.part[0].children[1] = this.pageData.copper_2
+      this.part[0].children[2] = this.pageData.copper_3
+      this.part[1].children[0] = this.pageData.silver_1
+      this.part[1].children[1] = this.pageData.silver_2
+      this.part[2].children[0] = this.pageData.gold
+      this.$nextTick(() => {
+        this.$refs.collapse.resize()
+      })
       return this.part
     },
   },
@@ -97,10 +112,10 @@ export default {
   justify-content: space-between;
   margin-left: 40rpx;
   margin-top: 5rpx;
-  .price{
+  .price {
     display: flex;
   }
-  image{
+  image {
     margin-top: 5rpx;
     width: 30rpx;
   }

@@ -1,11 +1,11 @@
 <!--
  * @Date: 2021-09-20 01:55:52
  * @LastEditors: AaronChu
- * @LastEditTime: 2021-09-22 17:54:03
+ * @LastEditTime: 2021-09-23 13:09:40
 -->
 <template>
   <view class="page">
-    <z-paging ref="paging" v-model="dataList" @query="getData" :default-page-size="5" :auto-show-back-to-top="true" :refresher-end-bounce-enabled="true" :refresher-complete-delay="300">
+    <z-paging ref="paging" v-model="dataList" @query="getData" :default-page-size="3" :auto-show-back-to-top="true" :refresher-end-bounce-enabled="true" :refresher-complete-delay="300">
       <view class="options" slot="top">
         <view class="search">
           <u-search placeholder="根据遗物或部件名称搜索" v-model="keyword" :clearabled="true" :show-action="true" action-text="搜索" @custom="searchList" @search="searchList" :animation="false"></u-search>
