@@ -1,7 +1,7 @@
 <!--
  * @Date: 2021-09-22 11:40:40
  * @LastEditors: AaronChu
- * @LastEditTime: 2021-09-23 14:38:27
+ * @LastEditTime: 2021-09-23 18:30:53
 -->
 <template>
   <uni-transition mode-class="slide-bottom" :show="true">
@@ -42,7 +42,7 @@
           </uni-collapse-item>
         </uni-collapse>
       </view>
-      <view slot="foot"><u-section title="贡献人：" sub-title="查看遗物详细"></u-section></view>
+      <view slot="foot"><u-section :title="'贡献人：'+pageData.contribute" sub-title="查看遗物详细" @click="viewDetail(pageData._id)"></u-section></view>
     </u-card>
   </uni-transition>
 </template>
@@ -79,6 +79,9 @@ export default {
     },
   },
   methods: {
+    viewDetail(id){
+      uni.navigateTo({ url: `/pages/remain/remain?_id=${id}` })
+    },
     transImg(name) {
       let img
       if (name == '丽斯') {

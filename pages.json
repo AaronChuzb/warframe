@@ -52,6 +52,15 @@
       "navigationBarTitleText": "计划日志",
       "enablePullDownRefresh": false
     }
+  }, {
+    "path": "pages/remain/remain",
+    "style": {
+      "app-plus": {
+        "bounce": "none"
+      },
+      "navigationBarTitleText": "遗物详细",
+      "enablePullDownRefresh": false
+    }
   }],
   "easycom": {
     "^u-(.*)": "uview-ui/components/u-$1/u-$1.vue"
