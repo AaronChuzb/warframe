@@ -1,17 +1,17 @@
 <!--
  * @Date: 2021-09-20 01:55:52
  * @LastEditors: AaronChu
- * @LastEditTime: 2021-09-26 17:27:29
+ * @LastEditTime: 2021-09-26 21:00:16
 -->
 <template>
   <view class="page">
     <view class="options">
       <view class="search">
         <view class="stock-choose" @click="show = true">
-          <view class="label">{{stock.label}}</view>
+          <view class="label">{{ stock.text }}</view>
           <u-icon name="arrow-down"></u-icon>
         </view>
-        <u-select v-model="show" :list="options" @confirm="stockChange" mode="single-column"></u-select>
+        <u-action-sheet :list="options" @click="stockChange" v-model="show"></u-action-sheet>
         <u-search style="flex: 1" placeholder="根据遗物或部件名称搜索" v-model="keyword" :clearabled="true" :show-action="true" action-text="搜索" @custom="searchList" @search="searchList" :animation="false"></u-search>
       </view>
       <view class="subsection" style="margin-top: 15rpx">
@@ -49,22 +49,22 @@ export default {
       temp: ['', ''],
       options: [
         {
-          label: '全部',
+          text: '全部',
           value: '',
         },
         {
-          label: '已入库',
+          text: '已入库',
           value: 1,
         },
         {
-          label: '未入库',
+          text: '未入库',
           value: 2,
-        }
+        },
       ],
       show: false,
       stock: {
-        label: '全部',
-        value: 0
+        text: '全部',
+        value: '',
       },
     }
   },
@@ -80,19 +80,18 @@ export default {
   },
   methods: {
     typeChange(e) {
-      console.log(e)
       this.type = this.list[e]._id
       // 添加延时函数解决卡顿问题
       setTimeout(() => {
         this.$refs.paging.reload()
       }, 300)
     },
-    stockChange(e){
-      this.stock = e[0]
+    stockChange(e) {
+      this.stock = this.options[e]
       // 等待动画完成
-      setTimeout(()=>{
+      setTimeout(() => {
         this.$refs.paging.reload()
-      },150)
+      }, 150)
     },
     async searchList() {
       // 搜索前判断字符串改变或者类型改变，减少不必要的请求。
@@ -130,16 +129,16 @@ page {
   padding: 20rpx 0;
   box-shadow: 0 2rpx 10rpx 0 rgba(0, 0, 0, 0.15);
   z-index: 999;
-  .stock-choose{
+  .stock-choose {
     width: 150rpx;
     display: flex;
     align-items: center;
     justify-content: center;
-    .label{
+    .label {
       margin-right: 10rpx;
     }
   }
-  .search{
+  .search {
     display: flex;
     align-items: center;
     padding: 0 25rpx;
