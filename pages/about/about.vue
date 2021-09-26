@@ -1,28 +1,48 @@
 <!--
  * @Date: 2021-09-23 15:38:09
  * @LastEditors: AaronChu
- * @LastEditTime: 2021-09-23 17:19:40
+ * @LastEditTime: 2021-09-25 01:17:41
 -->
 <template>
   <view class="page">
-    <scroll-view scroll-y style="height: 100vh"> 
-      <u-parse :html="content"></u-parse>
+    <scroll-view scroll-y style="height: 100vh">
+      <view class="u-content">
+        <u-parse :html="content" :tag-style="style"></u-parse>
+      </view>
+      <view style="height: 40rpx"></view>
     </scroll-view>
   </view>
 </template>
 
 <script>
+import { about } from '../../api/mine'
 export default {
-  data(){
-    return{
-      content: '<p>露从今夜白，月是故乡明</p><img src="https://cdn.uviewui.com/uview/swiper/2.jpg" />'
+  data() {
+    return {
+      content: '',
+      style: {
+        img: 'display: block; margin:0 auto;',
+      },
     }
-  }
+  },
+  async onLoad() {
+    const res = await about()
+    console.log(res)
+    this.content = res.text
+  },
 }
 </script>
 
 <style lang="scss" scoped>
-.page{
+.page {
   background: #fff;
+}
+.u-content {
+  color: $u-content-color;
+  font-size: 32rpx;
+  line-height: 1.8;
+  width: 750rpx;
+  padding: 20rpx;
+  
 }
 </style>

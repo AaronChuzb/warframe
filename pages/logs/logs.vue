@@ -1,12 +1,20 @@
 <!--
  * @Date: 2021-09-23 15:41:13
  * @LastEditors: AaronChu
- * @LastEditTime: 2021-09-23 16:44:07
+ * @LastEditTime: 2021-09-24 22:13:13
 -->
+
+
+
 <template>
   <view class="page">
-    <scroll-view scroll-y style="height: 100vh">
-      <view class="log" v-for="(item, index) in logList" :key="index">
+    <z-paging ref="paging" v-model="dataList" @query="getData" :default-page-size="10" :auto-show-back-to-top="true" :refresher-end-bounce-enabled="true" :refresher-complete-delay="300">
+      <view class="options" slot="top">
+        <view class="search">
+          <u-search placeholder="模糊搜索" v-model="keyword" :clearabled="true" :show-action="true" action-text="搜索" @custom="searchList" @search="searchList" :animation="false"></u-search>
+        </view>
+      </view>
+      <view class="log" v-for="(item, index) in dataList" :key="index">
         <view class="dot">
           <view class="center">
             <view class="back"></view>
@@ -20,59 +28,49 @@
           <text>{{item.content}}</text>
         </view>
       </view>
-    </scroll-view>
+    </z-paging>
   </view>
 </template>
 
 <script>
+import { logs } from '../../api/mine'
+
 export default {
   data() {
     return {
-      logList: [
-        {
-          date: '2021-10-01',
-          version: '1.1.0',
-          content: '1.dwjkahfwkaf\n2.dhwjakhdkdjkw',
-        },
-        {
-          date: '2021-10-01',
-          version: '1.1.0',
-          content: '1.dwjkahfwkaf\n2.dhwjakhdkdjkw',
-        },
-        {
-          date: '2021-10-01',
-          version: '1.1.0',
-          content: '1.dwjkahfwkaf\n2.dhwjakhdkdjkw',
-        },
-        {
-          date: '2021-10-01',
-          version: '1.1.0',
-          content: '1.dwjkahfwkaf\n2.dhwjakhdkdjkw',
-        },
-        {
-          date: '2021-10-01',
-          version: '1.1.0',
-          content: '1.dwjkahfwkaf\n2.dhwjakhdkdjkw',
-        },
-        {
-          date: '2021-10-01',
-          version: '1.1.0',
-          content: '1.dwjkahfwkaf\n2.dhwjakhdkdjkw',
-        },
-        {
-          date: '2021-10-01',
-          version: '1.1.0',
-          content: '1.dwjkahfwkaf\n2.dhwjakhdkdjkw',
-        },
-      ],
+      dataList: [],
+      keyword: '',
     }
+  },
+  async onLoad() {
+    
+  },
+  methods: {
+    async searchList(){
+      await this.$refs.paging.reload()
+    },
+    async getData(pageNo, pageSize) {
+      const res = await logs(pageNo, pageSize, this.keyword)
+      this.$refs.paging.complete(res.models)
+    },
   },
 }
 </script>
 
 <style lang="scss" scoped>
 .page {
+  height: 100%;
+  min-height: 100vh;
   background: #fff;
+}
+.options {
+  height: 100rpx;
+  background: #fff;
+  padding: 20rpx 0;
+  box-shadow: 0 2rpx 10rpx 0 rgba(0, 0, 0, 0.15);
+  .search {
+    padding: 0 25rpx;
+  }
 }
 .log {
   margin-left: 50rpx;

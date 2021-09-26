@@ -1,7 +1,7 @@
 <!--
  * @Date: 2021-09-20 17:58:56
  * @LastEditors: AaronChu
- * @LastEditTime: 2021-09-23 18:21:19
+ * @LastEditTime: 2021-09-24 21:44:00
 -->
 <template>
   <view class="page">
@@ -13,11 +13,11 @@
       </view>
       <view class="bar">
         <view class="item">
-          <u-count-to :use-easing="true" :start-val="0" :end-val="30"></u-count-to>
+          <u-count-to :use-easing="true" :start-val="0" :end-val="count.remain"></u-count-to>
           <view class="">遗物数</view>
         </view>
         <view class="item">
-          <u-count-to :use-easing="true" :start-val="0" :end-val="327"></u-count-to>
+          <u-count-to :use-easing="true" :start-val="0" :end-val="count.part"></u-count-to>
           <view class="">部件数</view>
         </view>
       </view>
@@ -29,8 +29,8 @@
             </u-cell-item>
             <u-cell-item icon="chat" title="问题反馈"  @click="navPage(0)"></u-cell-item>
             <u-cell-item icon="thumb-up" title="鸣谢名单"  @click="navPage(1)"></u-cell-item>
-            <u-cell-item icon="grid" title="数据来源"  @click="navPage(2)"></u-cell-item>
             <u-cell-item icon="clock" title="计划日志"  @click="navPage(3)"></u-cell-item>
+            <u-cell-item icon="info-circle" title="关于"  @click="navPage(2)"></u-cell-item>
             <!-- <u-cell-item icon="gift" title="赞赏支持"  @click="navPage(4)"></u-cell-item> -->
           </u-cell-group>
         </view>
@@ -40,10 +40,15 @@
 </template>
 
 <script>
+import { index } from '../../api/mine'
 export default {
   data() {
     return {
       collapse: false,
+      count:{
+        remain: 0,
+        part: 0
+      },
       navList: [
         '/pages/suggest/suggest',
         '/pages/acknowledgement/acknowledgement',
@@ -51,6 +56,11 @@ export default {
         '/pages/logs/logs',
       ]
     }
+  },
+  async onLoad(options) {
+    const res = await index()
+    console.log(res)
+    this.count = res
   },
   methods:{
     /**
