@@ -1,7 +1,7 @@
 <!--
  * @Date: 2021-09-23 14:49:32
  * @LastEditors: AaronChu
- * @LastEditTime: 2021-09-24 21:57:32
+ * @LastEditTime: 2021-09-26 16:03:36
 -->
 <template>
   <view class="page">
@@ -29,11 +29,8 @@ export default {
       keyword: '',
     }
   },
-  async onLoad() {
-    
-  },
   methods: {
-    async searchList(){
+    async searchList() {
       await this.$refs.paging.reload()
     },
     async getData(pageNo, pageSize) {

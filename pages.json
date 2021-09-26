@@ -40,7 +40,7 @@
       "app-plus": {
         "bounce": "none"
       },
-      "navigationBarTitleText": "数据来源",
+      "navigationBarTitleText": "关于",
       "enablePullDownRefresh": false
     }
   }, {

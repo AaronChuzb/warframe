@@ -1,7 +1,7 @@
 <!--
  * @Date: 2021-09-23 00:49:13
  * @LastEditors: AaronChu
- * @LastEditTime: 2021-09-24 21:40:46
+ * @LastEditTime: 2021-09-26 14:34:23
 -->
 <template>
   <view class="page">
@@ -15,7 +15,7 @@
       <u-field v-model="contact" label="联系方式" placeholder="非必填"></u-field>
     </view>
     <view class="button">
-      <u-button type="success" :loading="loading" @click="submit">提交反馈</u-button>
+      <u-button :custom-style="customStyle" type="success" :loading="loading" @click="submit">提交反馈</u-button>
     </view>
     <view class="tips">您反馈的问题如果处理过后将会在计划日志中进行说明。</view>
   </view>
@@ -31,6 +31,9 @@ export default {
       contact: '',
       type: 'Bug反馈',
       list: [{ name: 'Bug反馈' }, { name: '意见建议' }],
+      customStyle: {
+        backgroundColor: '#383838'
+      }
     }
   },
   methods:{
@@ -39,7 +42,7 @@ export default {
       this.type = this,list[e].name
     },
     async submit(){
-      if(this.text == ''){
+      if(this.text === ''){
         this.$refs.uToast.show({
 					title: '请填写内容',
 					type: 'error',
