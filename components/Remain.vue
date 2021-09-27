@@ -1,27 +1,12 @@
 <!--
  * @Date: 2021-09-22 11:40:40
  * @LastEditors: AaronChu
- * @LastEditTime: 2021-09-23 18:30:53
+ * @LastEditTime: 2021-09-27 10:27:26
 -->
 <template>
   <uni-transition mode-class="slide-bottom" :show="true">
     <u-card :thumb="transImg(pageData.type.name)" :border="false" :foot-border-top="false" :title="pageData.name" :sub-title="pageData.stock ? '已入库' : ''">
       <view slot="body">
-        <!-- <view class="part" v-for="(item, index) in partList" :key="index" style="margin-bottom: 15rpx">
-          <view class="title">
-            <image :src="item.img" mode="widthFix" style="margin-bottom: 5rpx" />
-            <view :style="{ color: item.color }">{{ item.title }}</view>
-          </view>
-          <view v-for="child in item.children" :key="child.name">
-            <view class="item">
-              <view class="name">{{ child.name }}</view>
-              <view class="price" v-if="child.price != 0">
-                <view :style="{ color: item.color }">{{ child.price }}</view>
-                <image src="/static/bi.png" mode="widthFix" />
-              </view>
-            </view>
-          </view>
-        </view> -->
         <uni-collapse ref="collapse">
           <uni-collapse-item :name="index" :show-animation="true" :open="open" title-border="none" :border="false" v-for="(item, index) in partList" :key="index" style="margin-bottom: 15rpx">
             <template v-slot:title>

@@ -1,7 +1,7 @@
 <!--
  * @Date: 2021-09-23 14:49:32
  * @LastEditors: AaronChu
- * @LastEditTime: 2021-09-26 16:03:36
+ * @LastEditTime: 2021-09-27 10:32:32
 -->
 <template>
   <view class="page">
@@ -30,9 +30,18 @@ export default {
     }
   },
   methods: {
+    /**
+     * @description: 搜索和重新加载列表
+     */
     async searchList() {
       await this.$refs.paging.reload()
     },
+    
+    /**
+     * @description: 获取列表数据
+     * @param {Number} pageNo 页码
+     * @param {Number} pageSize 页大小
+     */
     async getData(pageNo, pageSize) {
       const res = await list(pageNo, pageSize, this.keyword)
       this.$refs.paging.complete(res.models)

@@ -1,7 +1,7 @@
 <!--
  * @Date: 2021-09-23 18:25:06
  * @LastEditors: AaronChu
- * @LastEditTime: 2021-09-26 15:57:23
+ * @LastEditTime: 2021-09-27 10:40:25
 -->
 <template>
   <view class="page">
@@ -113,6 +113,10 @@ export default {
     }
   },
   computed: {
+    /**
+     * @description: 部件列表结构变更
+     * @return {Array} this.part
+     */
     partList() {
       this.part[0].children[0] = this.pageData.copper_1
       this.part[0].children[1] = this.pageData.copper_2
@@ -122,6 +126,10 @@ export default {
       this.part[2].children[0] = this.pageData.gold
       return this.part
     },
+    /**
+     * @description: 判断字体颜色
+     * @return {String} 字体颜色
+     */
     getColor() {
       if (this.pageData.stock) {
         return '#e06c75'
@@ -129,6 +137,10 @@ export default {
         return '#383838'
       }
     },
+    /** 
+     * @description: 将指定字符串格式转换成表格识别的格式
+     * @return {Array} 表格识别数据 [{ title: '', content:[['','',''],['','','']] }]常见数据格式
+     */
     handleText() {
       var textList = []
       if (!this.pageData.stock) {
@@ -163,6 +175,11 @@ export default {
     this.pageData = res
   },
   methods: {
+    /**
+     * @description: 将字符串分割成3个3个一组的数组
+     * @param {String} str 指定格式的字符串使用中文"、"分隔
+     * @return {Array} 二维数组: [[],[]]
+     */
     group(str) {
       let res = []
       let arr = str.split('、')

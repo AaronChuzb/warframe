@@ -1,7 +1,7 @@
 <!--
  * @Date: 2021-09-20 17:58:56
  * @LastEditors: AaronChu
- * @LastEditTime: 2021-09-24 21:44:00
+ * @LastEditTime: 2021-09-27 10:34:13
 -->
 <template>
   <view class="page">
@@ -57,9 +57,8 @@ export default {
       ]
     }
   },
-  async onLoad(options) {
+  async onLoad() {
     const res = await index()
-    console.log(res)
     this.count = res
   },
   methods:{
@@ -69,6 +68,10 @@ export default {
     setCollapse(e){
       uni.setStorageSync('collapse', !this.collapse)
     },
+    /**
+     * @description: 页面跳转通用函数
+     * @param {Number} index 点击的列表下标
+     */
     navPage(index){
       uni.navigateTo({ url: this.navList[index] })
     }

@@ -1,7 +1,7 @@
 <!--
  * @Date: 2021-09-23 15:41:13
  * @LastEditors: AaronChu
- * @LastEditTime: 2021-09-24 22:13:13
+ * @LastEditTime: 2021-09-27 10:33:03
 -->
 
 
@@ -42,13 +42,18 @@ export default {
       keyword: '',
     }
   },
-  async onLoad() {
-    
-  },
   methods: {
+    /**
+     * @description: 搜索和重新加载列表
+     */
     async searchList(){
       await this.$refs.paging.reload()
     },
+    /**
+     * @description: 获取列表数据
+     * @param {Number} pageNo 页码
+     * @param {Number} pageSize 页大小
+     */
     async getData(pageNo, pageSize) {
       const res = await logs(pageNo, pageSize, this.keyword)
       this.$refs.paging.complete(res.models)

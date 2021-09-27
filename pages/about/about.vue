@@ -1,7 +1,7 @@
 <!--
  * @Date: 2021-09-23 15:38:09
  * @LastEditors: AaronChu
- * @LastEditTime: 2021-09-25 01:17:41
+ * @LastEditTime: 2021-09-27 10:42:53
 -->
 <template>
   <view class="page">
@@ -27,7 +27,6 @@ export default {
   },
   async onLoad() {
     const res = await about()
-    console.log(res)
     this.content = res.text
   },
 }

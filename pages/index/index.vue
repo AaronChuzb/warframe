@@ -1,7 +1,7 @@
 <!--
  * @Date: 2021-09-20 01:55:52
  * @LastEditors: AaronChu
- * @LastEditTime: 2021-09-26 21:00:16
+ * @LastEditTime: 2021-09-27 10:33:34
 -->
 <template>
   <view class="page">
@@ -70,6 +70,7 @@ export default {
   },
   async onLoad() {
     const res = await type()
+    // 将类型_id通过对比赋值
     res.forEach((item, index) => {
       this.list.some(e => {
         if (e.name === item.name) {
@@ -79,6 +80,10 @@ export default {
     })
   },
   methods: {
+    /**
+     * @description: 类型改变
+     * @param {Number} e 选中的类型下标
+     */
     typeChange(e) {
       this.type = this.list[e]._id
       // 添加延时函数解决卡顿问题
@@ -86,6 +91,11 @@ export default {
         this.$refs.paging.reload()
       }, 300)
     },
+
+    /**
+     * @description: 筛选类型变更
+     * @param {Number} e 选择的action下标
+     */
     stockChange(e) {
       this.stock = this.options[e]
       // 等待动画完成
@@ -93,6 +103,10 @@ export default {
         this.$refs.paging.reload()
       }, 150)
     },
+
+    /**
+     * @description: 搜索和重新加载列表
+     */
     async searchList() {
       // 搜索前判断字符串改变或者类型改变，减少不必要的请求。
       // 进行对比，满足一项条件才进行请求。
@@ -103,6 +117,12 @@ export default {
         this.temp[1] = this.type
       }
     },
+
+    /**
+     * @description: 获取列表数据
+     * @param {Number} pageNo 页码
+     * @param {Number} pageSize 页大小
+     */
     async getData(pageNo, pageSize) {
       const res = await list(pageNo, pageSize, this.keyword, this.type, this.stock.value)
       this.$refs.paging.complete(res.data)

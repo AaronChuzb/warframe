@@ -1,7 +1,7 @@
 <!--
  * @Date: 2021-09-23 00:49:13
  * @LastEditors: AaronChu
- * @LastEditTime: 2021-09-26 14:34:23
+ * @LastEditTime: 2021-09-27 10:42:03
 -->
 <template>
   <view class="page">
@@ -37,10 +37,17 @@ export default {
     }
   },
   methods:{
+    /**
+     * @description: 类型改变
+     * @param {Number} e
+     */
     typeChange(e){
-      console.log(e)
       this.type = this,list[e].name
     },
+
+    /**
+     * @description: 提交数据
+     */
     async submit(){
       if(this.text === ''){
         this.$refs.uToast.show({
@@ -66,7 +73,6 @@ export default {
       setTimeout(()=>{
         uni.navigateBack({ delta: 1 })
       }, 2300)
-      
     }
   }
 }
