@@ -1,7 +1,7 @@
 <!--
  * @Date: 2021-09-23 00:49:13
  * @LastEditors: AaronChu
- * @LastEditTime: 2021-09-27 10:42:03
+ * @LastEditTime: 2021-09-28 17:48:22
 -->
 <template>
   <view class="page">
@@ -42,7 +42,7 @@ export default {
      * @param {Number} e
      */
     typeChange(e){
-      this.type = this,list[e].name
+      this.type = this.list[e].name
     },
 
     /**
