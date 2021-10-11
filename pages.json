@@ -61,6 +61,20 @@
       "navigationBarTitleText": "遗物详细",
       "enablePullDownRefresh": false
     }
+  }, {
+    "path": "pages/rotation/rotation",
+    "style": {
+      "navigationBarTitleText": "钢铁精华奖励轮换",
+      "enablePullDownRefresh": false
+    }
+
+  }, {
+    "path": "pages/support/support",
+    "style": {
+      "navigationBarTitleText": "赞赏支持",
+      "enablePullDownRefresh": false
+    }
+
   }],
   "easycom": {
     "^u-(.*)": "uview-ui/components/u-$1/u-$1.vue"
@@ -71,6 +85,11 @@
     "borderStyle": "black",
     "backgroundColor": "#ffffff",
     "list": [{
+      "pagePath": "pages/rotation/rotation",
+      "iconPath": "static/tabbar/rotate-line.png",
+      "selectedIconPath": "static/tabbar/rotate-fill.png",
+      "text": "奖励轮换"
+    }, {
       "pagePath": "pages/index/index",
       "iconPath": "static/tabbar/frame-line.png",
       "selectedIconPath": "static/tabbar/frame-fill.png",

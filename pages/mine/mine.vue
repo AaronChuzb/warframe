@@ -1,7 +1,7 @@
 <!--
  * @Date: 2021-09-20 17:58:56
  * @LastEditors: AaronChu
- * @LastEditTime: 2021-09-27 10:34:13
+ * @LastEditTime: 2021-10-11 17:25:49
 -->
 <template>
   <view class="page">
@@ -31,7 +31,7 @@
             <u-cell-item icon="thumb-up" title="鸣谢名单"  @click="navPage(1)"></u-cell-item>
             <u-cell-item icon="clock" title="计划日志"  @click="navPage(3)"></u-cell-item>
             <u-cell-item icon="info-circle" title="关于"  @click="navPage(2)"></u-cell-item>
-            <!-- <u-cell-item icon="gift" title="赞赏支持"  @click="navPage(4)"></u-cell-item> -->
+            <u-cell-item icon="gift" title="赞赏支持"  @click="navPage(4)"></u-cell-item>
           </u-cell-group>
         </view>
       </view>
@@ -54,6 +54,7 @@ export default {
         '/pages/acknowledgement/acknowledgement',
         '/pages/about/about',
         '/pages/logs/logs',
+        '/pages/support/support',
       ]
     }
   },
