@@ -1,5 +1,12 @@
 {
   "pages": [{
+    "path": "pages/rotation/rotation",
+    "style": {
+      "navigationBarTitleText": "钢铁之路奖励轮换",
+      "enablePullDownRefresh": false
+    }
+
+  },{
     "path": "pages/index/index",
     "style": {
       "app-plus": {
@@ -61,14 +68,7 @@
       "navigationBarTitleText": "遗物详细",
       "enablePullDownRefresh": false
     }
-  }, {
-    "path": "pages/rotation/rotation",
-    "style": {
-      "navigationBarTitleText": "钢铁精华奖励轮换",
-      "enablePullDownRefresh": false
-    }
-
-  }, {
+  },  {
     "path": "pages/support/support",
     "style": {
       "navigationBarTitleText": "赞赏支持",
