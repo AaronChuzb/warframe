@@ -1,7 +1,7 @@
 <!--
  * @Date: 2021-10-12 00:09:48
  * @LastEditors: AaronChu
- * @LastEditTime: 2021-10-12 13:54:25
+ * @LastEditTime: 2021-10-12 20:57:58
 -->
 <template>
   <uni-transition mode-class="slide-bottom" :show="true">
@@ -12,8 +12,7 @@
           <view class="num">{{ itemData.price }}</view>
         </view>
         <view :class="showBg ? 'img-box' : ''">
-          <!-- <image :src="itemData.img" mode="widthFix" class="img" /> -->
-          <lazy-image :src="itemData.img" mode="widthFix" :index='itemData._id'></lazy-image>
+          <lazy-image width="200rpx" height="200rpx" :image="itemData.img" mode="widthFix" :index='itemData._id'></lazy-image>
         </view>
         <view class="name">{{ itemData.name }}</view>
       </view>
@@ -23,7 +22,6 @@
 
 <script>
 export default {
-  options: { styleIsolation: 'shared' }, // 使/deep/在小程序生效
   props: {
     itemData: {
       type: Object,
