@@ -1,7 +1,7 @@
 <!--
  * @Date: 2021-09-20 01:55:52
  * @LastEditors: AaronChu
- * @LastEditTime: 2021-10-12 15:20:20
+ * @LastEditTime: 2021-10-12 21:48:08
 -->
 <template>
   <view class="page">
@@ -21,12 +21,12 @@
     <view style="flex: 1">
       <z-paging ref="paging" :fixed="false" height="100%" v-model="dataList" @query="getData" :default-page-size="3" :auto-show-back-to-top="true" :refresher-end-bounce-enabled="true" :refresher-complete-delay="300">
         <uni-transition mode-class="slide-top" :show="showLog">
-        <u-card title="最新日志"  sub-title="点击关闭" @head-click="showLog = false">
-          <view slot="body">
-            <text>{{ log }}</text>
-          </view>
-          <view slot="foot"><u-section :show-line="false" sub-title="查看更多" @click="viewMoreLog"></u-section></view>
-        </u-card>
+          <u-card title="最新日志" sub-title="点击关闭" @head-click="showLog = false">
+            <view slot="body">
+              <text>{{ log }}</text>
+            </view>
+            <view slot="foot"><u-section :show-line="false" sub-title="查看更多" @click="viewMoreLog"></u-section></view>
+          </u-card>
         </uni-transition>
         <remain :page-data="item" v-for="item in dataList" :key="item._id" :high-light-name="realName"></remain>
       </z-paging>
@@ -77,13 +77,13 @@ export default {
       },
       showLog: true,
       log: '',
-      realName: ''
+      realName: '',
     }
   },
   async onLoad() {
     uni.showLoading({
       title: '加载中',
-      mask: false
+      mask: false,
     })
     const res = await type()
     // 将类型_id通过对比赋值
@@ -94,14 +94,14 @@ export default {
         }
       })
     })
-    const logData = await logs(1, 1, "")
+    const logData = await logs(1, 1, '')
     this.log = logData.models[0].content
   },
   methods: {
     /**
      * @description: 查看更多日志
      */
-    viewMoreLog(){
+    viewMoreLog() {
       uni.navigateTo({ url: '/pages/logs/logs' })
     },
     /**
@@ -155,6 +155,7 @@ export default {
       this.realName = res.realName
       uni.hideLoading()
     },
+    onShareAppMessage() {},
   },
 }
 </script>
