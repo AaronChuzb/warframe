@@ -68,13 +68,6 @@
       "navigationBarTitleText": "遗物详细",
       "enablePullDownRefresh": false
     }
-  },  {
-    "path": "pages/support/support",
-    "style": {
-      "navigationBarTitleText": "赞赏支持",
-      "enablePullDownRefresh": false
-    }
-
   }],
   "easycom": {
     "^u-(.*)": "uview-ui/components/u-$1/u-$1.vue"
