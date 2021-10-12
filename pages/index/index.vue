@@ -1,7 +1,7 @@
 <!--
  * @Date: 2021-09-20 01:55:52
  * @LastEditors: AaronChu
- * @LastEditTime: 2021-10-11 17:52:37
+ * @LastEditTime: 2021-10-12 15:20:20
 -->
 <template>
   <view class="page">
@@ -28,7 +28,7 @@
           <view slot="foot"><u-section :show-line="false" sub-title="查看更多" @click="viewMoreLog"></u-section></view>
         </u-card>
         </uni-transition>
-        <remain :page-data="item" v-for="item in dataList" :key="item._id"></remain>
+        <remain :page-data="item" v-for="item in dataList" :key="item._id" :high-light-name="realName"></remain>
       </z-paging>
     </view>
   </view>
@@ -76,7 +76,8 @@ export default {
         value: '',
       },
       showLog: true,
-      log: ''
+      log: '',
+      realName: ''
     }
   },
   async onLoad() {
@@ -151,6 +152,7 @@ export default {
     async getData(pageNo, pageSize) {
       const res = await list(pageNo, pageSize, this.keyword, this.type, this.stock.value)
       this.$refs.paging.complete(res.data)
+      this.realName = res.realName
       uni.hideLoading()
     },
   },

@@ -1,7 +1,7 @@
 <!--
  * @Date: 2021-09-22 11:40:40
  * @LastEditors: AaronChu
- * @LastEditTime: 2021-09-27 10:27:26
+ * @LastEditTime: 2021-10-12 15:31:40
 -->
 <template>
   <uni-transition mode-class="slide-bottom" :show="true">
@@ -15,9 +15,9 @@
                 <view :style="{ color: item.color }">{{ item.title }}</view>
               </view>
             </template>
-            <view v-for="child in item.children" :key="child.name">
+            <view v-for="child in item.children" :key="child.name" style="height: 40rpx">
               <view class="item">
-                <view class="name">{{ child.name }}</view>
+                <view class="name" :class="isHighLigh(child.name) ? 'high-light' : ''">{{ child.name }}</view>
                 <view class="price" v-if="child.price != 0">
                   <view :style="{ color: item.color }">{{ child.price }}</view>
                   <image src="/static/bi.png" mode="widthFix" />
@@ -27,7 +27,7 @@
           </uni-collapse-item>
         </uni-collapse>
       </view>
-      <view slot="foot"><u-section :title="'贡献人：'+pageData.contribute" sub-title="查看遗物详细" @click="viewDetail(pageData._id)"></u-section></view>
+      <view slot="foot"><u-section :title="'贡献人：' + pageData.contribute" sub-title="查看遗物详细" @click="viewDetail(pageData._id)"></u-section></view>
     </u-card>
   </uni-transition>
 </template>
@@ -37,6 +37,10 @@ export default {
   props: {
     pageData: {
       type: Object,
+    },
+    highLightName: {
+      type: String,
+      default: '',
     },
   },
   data() {
@@ -57,14 +61,19 @@ export default {
       this.part[1].children[0] = this.pageData.silver_1
       this.part[1].children[1] = this.pageData.silver_2
       this.part[2].children[0] = this.pageData.gold
-      this.$nextTick(() => {
-        this.$refs.collapse.resize()
-      })
       return this.part
+    },
+    isHighLigh() {
+      return name => {
+        if (name.indexOf(this.highLightName) != -1 && this.highLightName != '') {
+          return true
+        }
+        return false
+      }
     },
   },
   methods: {
-    viewDetail(id){
+    viewDetail(id) {
       uni.navigateTo({ url: `/pages/remain/remain?_id=${id}` })
     },
     transImg(name) {
@@ -107,5 +116,9 @@ export default {
     margin-top: 5rpx;
     width: 30rpx;
   }
+}
+.high-light {
+  font-weight: bold;
+  color: dodgerblue;
 }
 </style>
