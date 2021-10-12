@@ -1,7 +1,7 @@
 <!--
  * @Date: 2021-10-11 21:41:34
  * @LastEditors: AaronChu
- * @LastEditTime: 2021-10-12 00:46:24
+ * @LastEditTime: 2021-10-12 13:54:45
 -->
 <template>
   <uni-transition mode-class="slide-right" :show="true">
@@ -9,11 +9,12 @@
       <view class="card" :class="current == itemData.rank ? 'choose' : ''">
         <view class="price">
           <image src="/static/gj.png" mode="widthFix" class="icon" />
+
           <view class="num">{{ itemData.price }}</view>
         </view>
         <view class="tips" v-if="itemData.rank == 1">本周</view>
         <view :class="showBg ? 'img-box' : ''">
-          <image :src="itemData.img" mode="widthFix" class="img" />
+          <lazy-image :src="itemData.img" mode="widthFix" :index="itemData._id"></lazy-image>
         </view>
         <view class="name">{{ itemData.name }}</view>
         <view class="count-down">
@@ -27,6 +28,7 @@
 
 <script>
 export default {
+  options: { styleIsolation: 'shared' }, // 使/deep/在小程序生效
   props: {
     itemData: {
       type: Object,
@@ -47,6 +49,7 @@ export default {
   data() {
     return {}
   },
+  
   computed: {
     date() {
       let today = new Date()
@@ -134,6 +137,7 @@ export default {
   }
   .img {
     width: 200rpx;
+    
     display: block;
     margin: 0 auto;
   }
@@ -158,5 +162,11 @@ export default {
   transform: scale(1.125);
   //width: 100% !important;
   // width: 120%;
+}
+/deep/ .m-image {
+  width: 200rpx;
+  height: 200rpx;
+  display: block;
+  margin: 0 auto;
 }
 </style>

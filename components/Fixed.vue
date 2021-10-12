@@ -1,7 +1,7 @@
 <!--
  * @Date: 2021-10-12 00:09:48
  * @LastEditors: AaronChu
- * @LastEditTime: 2021-10-12 00:46:10
+ * @LastEditTime: 2021-10-12 13:54:25
 -->
 <template>
   <uni-transition mode-class="slide-bottom" :show="true">
@@ -12,7 +12,8 @@
           <view class="num">{{ itemData.price }}</view>
         </view>
         <view :class="showBg ? 'img-box' : ''">
-          <image :src="itemData.img" mode="widthFix" class="img" />
+          <!-- <image :src="itemData.img" mode="widthFix" class="img" /> -->
+          <lazy-image :src="itemData.img" mode="widthFix" :index='itemData._id'></lazy-image>
         </view>
         <view class="name">{{ itemData.name }}</view>
       </view>
@@ -22,6 +23,7 @@
 
 <script>
 export default {
+  options: { styleIsolation: 'shared' }, // 使/deep/在小程序生效
   props: {
     itemData: {
       type: Object,
@@ -88,16 +90,17 @@ export default {
   .img-box {
     background-image: url('/static/rotation-bg.png');
   }
-  .img {
-    width: 200rpx;
-    display: block;
-    margin: 0 auto;
-  }
   .name {
     text-align: center;
     transform: translate3d(0, 0, 0);
     color: #fff;
     margin: 15rpx 0;
   }
+}
+/deep/ .m-image {
+  width: 200rpx !important;
+  height: 200rpx !important;
+  display: block;
+  margin: 0 auto;
 }
 </style>
