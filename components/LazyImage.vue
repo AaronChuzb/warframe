@@ -1,7 +1,7 @@
 <!--
  * @Date: 2021-10-12 10:37:41
  * @LastEditors: AaronChu
- * @LastEditTime: 2021-10-12 14:31:47
+ * @LastEditTime: 2021-10-12 14:35:56
 -->
 <template>
   <div class="m-image" :class="[{ showLoading, border }, `m-image-${index}`]" :style="{ '--bgColor': bgColor }">
@@ -27,7 +27,7 @@ export default {
     // 是否展示图片加载中动画
     showLoading: {
       type: Boolean,
-      default: true,
+      default: false,
     },
     // 图片加载前背景色
     bgColor: {
