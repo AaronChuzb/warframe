@@ -1,7 +1,7 @@
 <template>
   <view class="u-wrap" :style="{opacity: Number(opacity), transition: `opacity ${time / 1000}s ease-in-out`,}" :class="'lazy-image-' + elIndex">
     <view :class="'lazy-image-' + elIndex">
-      <image :style="{ width: changeValue(width), height: changeValue(height) }" v-if="!isError" class="u-lazy-item" :src="isShow ? image : loadingImg" :mode="imgMode" @load="imgLoaded" @error="loadError" @tap="clickImg"></image>
+      <image :style="{ width: changeValue(width), height: changeValue(height) }" v-if="!isError" class="u-lazy-item" :src="isShow ? image + '?x-oss-process=image/resize,p_50/quality,q_100/sharpen,100' : loadingImg" :mode="imgMode" @load="imgLoaded" @error="loadError" @tap="clickImg"></image>
       <image :style="{ width: changeValue(width), height: changeValue(height) }" class="u-lazy-item error" v-else :src="errorImg" :mode="imgMode" @load="errorImgLoaded" @tap="clickImg"></image>
     </view>
   </view>
