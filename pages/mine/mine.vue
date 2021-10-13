@@ -1,7 +1,7 @@
 <!--
  * @Date: 2021-09-20 17:58:56
  * @LastEditors: AaronChu
- * @LastEditTime: 2021-10-12 18:24:09
+ * @LastEditTime: 2021-10-13 16:33:10
 -->
 <template>
   <view class="page">
@@ -31,14 +31,16 @@
             <u-cell-item icon="thumb-up" title="鸣谢名单" @click="navPage(1)"></u-cell-item>
             <u-cell-item icon="clock" title="计划日志" @click="navPage(3)"></u-cell-item>
             <u-cell-item icon="info-circle" title="关于" @click="navPage(2)"></u-cell-item>
+            <!--  #ifndef MP-QQ  -->
             <u-cell-item icon="gift" title="赞赏支持" @click="$refs.popup.open()"></u-cell-item>
+            <!--  #endif -->
           </u-cell-group>
         </view>
       </view>
     </scroll-view>
     <uni-popup ref="popup" type="center">
       <view class="support">
-        <image src="/static/support.jpg" mode="widthFix" show-menu-by-longpress />
+        <image src="/static/mp-weixin/support.jpg" mode="widthFix" show-menu-by-longpress />
         <view class="tips">小程序不支持长按识别二维码，需保存到本地才能扫码</view>
         <view class="tips">要是能来帮我打下 钢铁蝠力使 就更好了</view>
       </view>
