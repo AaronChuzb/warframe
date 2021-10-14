@@ -1,7 +1,7 @@
 <!--
  * @Date: 2021-10-11 21:31:48
  * @LastEditors: AaronChu
- * @LastEditTime: 2021-10-12 13:47:03
+ * @LastEditTime: 2021-10-14 15:42:18
 -->
 <template>
   <view class="page">
@@ -57,6 +57,7 @@ export default {
       uni.hideLoading()
     },
   },
+  onShareAppMessage() {},
 }
 </script>
 
