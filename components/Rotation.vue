@@ -13,12 +13,13 @@
           <view class="num">{{ itemData.price }}</view>
         </view>
         <view class="tips" v-if="itemData.rank == 1">本周</view>
+        <view class="tips" style="background: #3299c9;" v-if="itemData.rank == 2">下周</view>
         <view :class="showBg ? 'img-box' : ''">
           <lazy-image width="200rpx" height="200rpx" :image="itemData.img" mode="widthFix" :index='itemData._id'></lazy-image>
         </view>
         <view class="name">{{ itemData.name }}</view>
         <view class="count-down">
-          <view class="title">距离{{ itemData.rank == 1 ? '结束' : '开放' }}兑换还剩</view>
+          <view class="title">距离 <text style="color: #DD524D;" v-if="itemData.rank == 1">结束</text><text style="color: #007AFF;" v-if="itemData.rank != 1">开放</text>兑换还剩</view>
           <u-count-down :timestamp="date" separator="zh" font-size="24rpx" separator-size="24rpx" :show-seconds="false"></u-count-down>
         </view>
       </view>
@@ -105,7 +106,8 @@ export default {
     line-height: 32rpx;
     font-size: 24rpx;
     transform: translate3d(0, 0, 0);
-    background: #3299c9;
+    
+		background:  #DD524D;
   }
   .price {
     position: absolute;
