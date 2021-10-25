@@ -8,7 +8,7 @@
     <scroll-view scroll-y style="height: 100vh">
       <view class="header">
         <view class="avatar">
-          <u-avatar src="/static/logo.png" size="150"></u-avatar>
+          <u-avatar src="/static/logo.png" size="150" @click="login"></u-avatar>
         </view>
       </view>
       <view class="bar">
@@ -66,6 +66,9 @@ export default {
     this.count = res
   },
   methods: {
+		login(){
+			this.$login()
+		},
     /**
      * @description: 设置折叠面板默认显示
      */

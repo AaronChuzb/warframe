@@ -6,12 +6,16 @@
 import Vue from 'vue'
 import App from './App'
 import uView from "uview-ui";
+import { login } from "./utils/login.js"
+import store from "./store/index.js"
 
 import LazyImage from './components/LazyImage'
 
 Vue.use(uView);
 
 Vue.component('lazy-image', LazyImage)
+Vue.prototype.$store=store;
+Vue.prototype.$login = login
 
 Vue.config.productionTip = false
 

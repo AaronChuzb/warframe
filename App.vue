@@ -36,7 +36,10 @@ export default {
       })
     })
   },
-  onShow: function () {},
+  onShow: function () {
+		// 获取服务提供商
+		this.$store.dispatch('getProvider')
+	},
   onHide: function () {},
 }
 </script>
