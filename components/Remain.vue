@@ -5,7 +5,7 @@
 -->
 <template>
   <uni-transition mode-class="slide-bottom" :show="true">
-    <u-card :thumb="transImg(pageData.type.name)" :border="false" :foot-border-top="false" :title="pageData.name" :sub-title="pageData.stock ? '已入库' : ''">
+    <u-card :thumb="transImg(pageData.type.name)" :border="false" :foot-border-top="false" :title="pageData.name" :sub-title="getSubtitle" :sub-title-color="statusColor">
       <view slot="body">
         <uni-collapse ref="collapse">
           <uni-collapse-item :name="index" :show-animation="true" :open="open" title-border="none" :border="false" v-for="(item, index) in partList" :key="index" style="margin-bottom: 15rpx">
@@ -71,6 +71,25 @@ export default {
         return false
       }
     },
+		getSubtitle(){
+			if(this.pageData.status == '活动出库'){
+				return (this.pageData.status + '（' + this.pageData.version + '）')
+			}
+			return this.pageData.status
+		},
+		statusColor(){
+			if(this.pageData.status == '已入库'){
+				return '#909399'
+			} else if (this.pageData.status == '永久出库'){
+				return '#66db7a'
+			} else if (this.pageData.status == '限时出库'){
+				return '#ea5764'
+			} else if (this.pageData.status == '活动出库'){
+				return '#f5be45'
+			} else if (this.pageData.status == '版本出库'){
+				return '#3d8bee'
+			}
+		}
   },
   methods: {
     viewDetail(id) {

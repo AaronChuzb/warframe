@@ -8,11 +8,11 @@
     <view class="options">
       <view class="search">
         <view class="stock-choose" @click="show = true">
-          <view class="label">{{ stock.text }}</view>
+          <view class="label">{{ status.text }}</view>
           <u-icon name="arrow-down"></u-icon>
         </view>
-        <u-action-sheet :list="options" @click="stockChange" v-model="show"></u-action-sheet>
-        <u-search style="flex: 1" placeholder="根据遗物或部件名称搜索" v-model="keyword" :clearabled="true" :show-action="true" action-text="搜索" @custom="searchList" @search="searchList" :animation="false"></u-search>
+        <u-action-sheet :list="options" @click="statusChange" v-model="show"></u-action-sheet>
+        <u-search style="flex: 1" placeholder="模糊搜索" v-model="keyword" :clearabled="true" :show-action="true" action-text="搜索" @custom="searchList" @search="searchList" :animation="false"></u-search>
       </view>
       <view class="subsection" style="margin-top: 15rpx">
         <u-subsection :list="list" :current="0" @change="typeChange"></u-subsection>
@@ -63,18 +63,34 @@ export default {
         },
         {
           text: '已入库',
-          value: 1,
+          value: '已入库',
         },
         {
-          text: '未入库',
-          value: 2,
+          text: '版本出库',
+          value: '版本出库',
         },
+				{
+				  text: '限时出库',
+				  value: '限时出库',
+				},
+				{
+				  text: '活动出库',
+				  value: '活动出库',
+				},
+				{
+				  text: '永久出库',
+				  value: '永久出库',
+				},
       ],
       show: false,
       stock: {
         text: '全部',
         value: '',
       },
+			status: {
+				text: '全部',
+				value: '',
+			},
       showLog: true,
       log: '',
       realName: '',
@@ -121,8 +137,8 @@ export default {
      * @description: 筛选类型变更
      * @param {Number} e 选择的action下标
      */
-    stockChange(e) {
-      this.stock = this.options[e]
+    statusChange(e) {
+      this.status = this.options[e]
       // 等待动画完成
       setTimeout(() => {
         this.$refs.paging.reload()
@@ -150,7 +166,7 @@ export default {
      * @param {Number} pageSize 页大小
      */
     async getData(pageNo, pageSize) {
-      const res = await list(pageNo, pageSize, this.keyword, this.type, this.stock.value)
+      const res = await list(pageNo, pageSize, this.keyword, this.type, this.stock.value, this.status.value)
       this.$refs.paging.complete(res.data)
       this.realName = res.realName
       uni.hideLoading()
@@ -179,7 +195,7 @@ page {
   box-shadow: 0 2rpx 10rpx 0 rgba(0, 0, 0, 0.15);
   z-index: 999;
   .stock-choose {
-    width: 150rpx;
+    width: 170rpx;
     display: flex;
     align-items: center;
     justify-content: center;

@@ -67,7 +67,7 @@ export default {
   },
   methods: {
 		login(){
-			this.$login()
+			// this.$login()
 		},
     /**
      * @description: 设置折叠面板默认显示

@@ -8,13 +8,14 @@ import request from "../utils/request";
 export function type() {
   return request('/index/type', {}, 'GET')
 }
-export function list(page, pageSize, search, type, stock) {
+export function list(page, pageSize, search, type, stock, status) {
   return request('/index/list', {
     page,
     pageSize,
     search,
     type,
-    stock
+    stock,
+		status
   }, 'GET')
 }
 
