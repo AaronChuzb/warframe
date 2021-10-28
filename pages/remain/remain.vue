@@ -72,10 +72,32 @@
             </view>
           </u-col>
         </u-row>
+				<u-button type="warning" @click="$refs.popup.open()">快速报告问题</u-button>
         <view style="height: 40rpx"></view>
       </view>
       <u-empty text="暂无数据" mode="data" v-if="pageData.name === ''"></u-empty>
     </scroll-view>
+		<uni-popup ref="popup" type="center">
+		  <view class="popup" style="min-height: 544rpx">
+		    <view class="top">
+		      <view class="title">提交“{{ pageData.name }}”的问题</view>
+		    </view>
+		    <view class="form">
+		      <view class="input-item ">
+		        <view class="name"><text>*</text>你的昵称</view>
+		        <input type="text" />
+		      </view>
+		      <view class="input-item ">
+		        <view class="name"><text>*</text>问题描述</view>
+						<u-input  type="textarea"  height="100rpx" :auto-height="false" maxlength="500" :custom-style="textarea" />
+		      </view>
+		      <view class="button_box">
+		        <view class="button" hover-class="button-hover"  @click="$refs.popup.close()">取消</view>
+		        <view class="button save" hover-class="button-hover"  @click="">提交</view>
+		      </view>
+		    </view>
+		  </view>
+		</uni-popup>
   </view>
 </template>
 
@@ -110,6 +132,10 @@ export default {
         { title: '精良', color: '#cdcbcd', img: '/static/silver.png', children: [] },
         { title: '稀有', color: '#dbbd6a', img: '/static/gold.png', children: [] },
       ],
+			textarea:{
+				background: '#f8f8f8',
+				padding: '14rpx'
+			}
     }
   },
   computed: {
@@ -233,6 +259,92 @@ export default {
   image {
     margin-top: 5rpx;
     width: 30rpx;
+  }
+}
+.popup {
+  width: 630rpx;
+  min-height: 712rpx;
+  padding: 36rpx 30rpx;
+  background: #ffffff;
+  box-shadow: 0rpx 6rpx 20rpx rgba(8, 10, 55, 0.1);
+  border-radius: 10rpx;
+  .top {
+    display: flex;
+    justify-content: space-between;
+    font-size: 36rpx;
+    font-weight: bold;
+    line-height: 36rpx;
+    color: #333333;
+    align-items: center;
+    .iconfont {
+      color: #d63131;
+      font-size: 48rpx;
+      line-height: 48rpx;
+    }
+  }
+  .form {
+    margin-top: 84rpx;
+    .input-item {
+      .name {
+        font-size: 28rpx;
+        font-weight: 500;
+        line-height: 28rpx;
+        color: #222222;
+        margin-bottom: 20rpx;
+      }
+      input {
+        padding: 0 26rpx;
+        height: 80rpx;
+        background: #f8f8f8;
+        border-radius: 10rpx;
+        margin-bottom: 40rpx;
+      }
+      .type {
+        padding: 10rpx;
+        height: 80rpx;
+        background: #f8f8f8;
+        border-radius: 10rpx;
+        margin-bottom: 40rpx;
+        display: flex;
+        .child {
+          width: 305rpx;
+          text-align: center;
+          font-size: 28rpx;
+          font-weight: 500;
+          line-height: 60rpx;
+          color: #8a8c90;
+          border-radius: 10rpx;
+        }
+        .child_choose {
+          background: #03a69a;
+          color: #ffffff;
+        }
+      }
+    }
+    .button_box {
+      display: flex;
+      // width: 630rpx;
+      margin: 40rpx auto 0;
+      justify-content: space-between;
+      .button {
+        width: 270rpx;
+        height: 80rpx;
+        background: #e0e2e3;
+        border-radius: 10rpx;
+        line-height: 80rpx;
+        text-align: center;
+        font-size: 32rpx;
+        font-weight: 500;
+        color: #334148;
+      }
+      .save {
+        background: #03a69a;
+        color: #ffffff;
+      }
+      .new {
+        width: 630rpx;
+      }
+    }
   }
 }
 </style>
