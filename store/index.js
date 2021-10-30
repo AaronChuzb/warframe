@@ -1,3 +1,8 @@
+/*
+ * @Date: 2021-10-30 21:23:49
+ * @LastEditors: AaronChu
+ * @LastEditTime: 2021-10-30 22:01:24
+ */
 import Vue from "vue"
 import Vuex from "vuex"
 import getters from "./getters.js"
@@ -5,7 +10,10 @@ Vue.use(Vuex)
 export default new Vuex.Store({
 	// 全局属性变量
 	state: {
-		provider: ''
+		provider: '',
+    userInfo: {
+      
+    }
 	},
 	mutations: {
 		SET_USERINFO: (state, userInfo) => {
@@ -30,7 +38,6 @@ export default new Vuex.Store({
 			uni.getUserProfile({
 				desc: "用于完善用户信息",
 				success: (res) => {
-					console.log(res)
 					uni.login({
 						provider: store.getters.provider,
 						success: (result) => {
@@ -45,7 +52,21 @@ export default new Vuex.Store({
 					})
 				}
 			})
-		}
+		},
+    getUserInfo({commit}){
+      uni.getUserProfile({
+				desc: "用于报告错误时用户名填充",
+				success: (res) => {
+          commit('SET_USERINFO', res.userInfo)
+				},
+				fail: (err) => {
+					uni.showToast({
+						title: err.errMsg,
+						icon: 'none'
+					})
+				}
+			})
+    }
 		
 	},
 	getters

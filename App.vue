@@ -1,7 +1,7 @@
 <!--
  * @Date: 2021-09-20 01:55:52
  * @LastEditors: AaronChu
- * @LastEditTime: 2021-09-28 11:10:59
+ * @LastEditTime: 2021-10-30 22:59:23
 -->
 
 <script>
@@ -54,4 +54,5 @@ export default {
   height: 100vh;
   background: #f2f2f2;
 }
+
 </style>

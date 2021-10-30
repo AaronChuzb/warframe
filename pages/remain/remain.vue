@@ -1,7 +1,7 @@
 <!--
  * @Date: 2021-09-23 18:25:06
  * @LastEditors: AaronChu
- * @LastEditTime: 2021-09-27 10:40:25
+ * @LastEditTime: 2021-10-30 22:56:05
 -->
 <template>
   <view class="page">
@@ -72,8 +72,8 @@
             </view>
           </u-col>
         </u-row>
-				<u-button type="warning" @click="$refs.popup.open()">快速报告问题</u-button>
-        <view style="height: 40rpx"></view>
+				<u-button class="float-button" type="warning" @click="openErrorWindow">快速报告问题</u-button>
+        <view style="height: 180rpx"></view>
       </view>
       <u-empty text="暂无数据" mode="data" v-if="pageData.name === ''"></u-empty>
     </scroll-view>
@@ -85,15 +85,15 @@
 		    <view class="form">
 		      <view class="input-item ">
 		        <view class="name"><text>*</text>你的昵称</view>
-		        <input type="text" />
+		        <input v-model="error.nick_name" placeholder="请输入你的昵称" type="text" />
 		      </view>
 		      <view class="input-item ">
 		        <view class="name"><text>*</text>问题描述</view>
-						<u-input  type="textarea"  height="100rpx" :auto-height="false" maxlength="500" :custom-style="textarea" />
+						<u-input v-model="error.content" type="textarea"  height="100rpx" :auto-height="false" maxlength="500" :custom-style="textarea" :clearable="false" />
 		      </view>
 		      <view class="button_box">
 		        <view class="button" hover-class="button-hover"  @click="$refs.popup.close()">取消</view>
-		        <view class="button save" hover-class="button-hover"  @click="">提交</view>
+		        <view class="button save" hover-class="button-hover"  @click="submitErrorMsg">提交</view>
 		      </view>
 		    </view>
 		  </view>
@@ -103,6 +103,7 @@
 
 <script>
 import { detail } from '../../api/index'
+import { feedback } from '../../api/mine'
 import Title from '../../components/Title'
 export default {
   components: {
@@ -135,7 +136,14 @@ export default {
 			textarea:{
 				background: '#f8f8f8',
 				padding: '14rpx'
-			}
+			},
+      error: {
+        platform: '',
+        object: '',
+        nick_name: '',
+        content: '',
+        status: 0
+      }
     }
   },
   computed: {
@@ -214,6 +222,24 @@ export default {
       }
       return res
     },
+    openErrorWindow(){
+      this.$refs.popup.open()
+    },
+    async submitErrorMsg(){
+      if(this.error.nick_name == ''){
+        this.$toast('请输入你的名称')
+        return
+      }
+      if(this.error.content == ''){
+        this.$toast('请输入反馈内容')
+        return
+      }
+      this.error.platform = this.$store.state.provider
+      this.error.object = JSON.stringify(this.pageData)
+      const res = await feedback(this.error)
+      this.$toast(res.message)
+      this.$refs.popup.close()
+    }
   },
 }
 </script>
@@ -291,6 +317,9 @@ export default {
         line-height: 28rpx;
         color: #222222;
         margin-bottom: 20rpx;
+        text{
+          color: #d63131;
+        }
       }
       input {
         padding: 0 26rpx;
@@ -346,5 +375,11 @@ export default {
       }
     }
   }
+}
+.float-button{
+  position: fixed;
+  bottom: 100rpx;
+  right: 20rpx;
+  left: 20rpx;
 }
 </style>

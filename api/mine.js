@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-09-23 18:07:51
  * @LastEditors: AaronChu
- * @LastEditTime: 2021-09-25 00:57:56
+ * @LastEditTime: 2021-10-30 22:53:15
  */
 import request from "../utils/request";
 
@@ -15,6 +15,10 @@ export function suggest(data) {
   return request('/mine/suggest', data, 'POST')
 }
 
+// 提交内容反馈
+export function feedback(data) {
+  return request('/mine/feedback', data, 'POST')
+}
 // 鸣谢名单
 export function list(page, pageSize, search) {
   return request('/mine/people', {

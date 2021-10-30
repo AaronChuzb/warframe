@@ -1,7 +1,7 @@
 <!--
  * @Date: 2021-09-20 17:58:56
  * @LastEditors: AaronChu
- * @LastEditTime: 2021-10-13 16:33:10
+ * @LastEditTime: 2021-10-30 21:54:17
 -->
 <template>
   <view class="page">
@@ -42,7 +42,6 @@
       <view class="support">
         <image src="/static/mp-weixin/support.jpg" mode="widthFix" show-menu-by-longpress />
         <view class="tips">小程序不支持长按识别二维码，需保存到本地才能扫码</view>
-        <view class="tips">要是能来帮我打下 钢铁蝠力使 就更好了</view>
       </view>
     </uni-popup>
   </view>
@@ -91,7 +90,7 @@ export default {
 
 <style lang="scss" scoped>
 .header {
-  background-image: url('/static/mine_bg.jpeg');
+  background-image: url('/static/0.jpg');
   background-repeat: no-repeat;
   background-size: 100% 100%;
   height: 442rpx;
