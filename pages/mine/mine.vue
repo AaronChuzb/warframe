@@ -7,7 +7,10 @@
 	<view class="page">
 		<scroll-view scroll-y style="height: 100vh">
 			<view class="header">
-				<view class="avatar"> <u-avatar src="/static/logo.png" size="150" @click="WXLogin"></u-avatar> </view>
+				<view class="avatar"> <u-avatar :src="userInfo.avatarUrl" size="150" @click="WXLogin"></u-avatar> </view>
+				<!--  #ifdef MP-QQ  -->
+				<button class="login-button" open-type="getUserInfo" @getuserinfo="QQLogin">登录</button>
+				<!--  #endif -->
 			</view>
 			<view class="bar">
 				<view class="item">
@@ -42,6 +45,7 @@
 
 <script>
 import { index } from '../../api/mine'
+import { login } from '../../api/user'
 export default {
 	data() {
 		return {
@@ -50,17 +54,19 @@ export default {
 				remain: 0,
 				part: 0
 			},
-			navList: ['/pages/suggest/suggest', '/pages/acknowledgement/acknowledgement', '/pages/about/about', '/pages/logs/logs']
+			navList: ['/pages/suggest/suggest', '/pages/acknowledgement/acknowledgement', '/pages/about/about', '/pages/logs/logs'],
+			provider: '',
+			userInfo: {}
 		}
 	},
 	async onLoad() {
 		const res = await index()
 		this.count = res
+		if(uni.getStorageSync('userInfo')){
+			this.userInfo = uni.getStorageSync('userInfo')
+		}
 	},
 	methods: {
-		login() {
-			// this.$login()
-		},
 		/**
 		 * @description: 设置折叠面板默认显示
 		 */
@@ -77,38 +83,33 @@ export default {
 		showSupport() {
 			this.$refs.popup.open()
 		},
-		WXLogin() {
+		async WXLogin() {
 			uni.getUserProfile({
 				desc: '用户同步数据',
 				lang: 'zh_CN',
 				success(res) {
-					console.log('用户信息-----------', res)
 					uni.login({
 						provider: 'weixin',
-						success: loginRes => {
-							console.log('获取code-----------', loginRes)
-							//调用接口传递参数
+						success: async loginRes => {
 							let parames = {
 								code: loginRes.code,
-								encryptedData: res.encryptedData,
-								iv: res.iv,
-								signature: res.signature,
-								rawData: res.rawData
+								rawData: res.rawData,
+								provider: 'weixin'
 							}
-							console.log('将参数传给后端-----------', parames)
-							// uni.request({ url: '', data: { parames: parames } }).then(res => {
-							// 	//获取到 openid 和 session_k后，自己的逻辑
-							// 	if (res.code == 1) {
-							// 		console.log('授权登录成功', res.data)
-							// 		console.log(res.data.openid)
-							// 		console.log(res.data.session_key)
-							// 	}
-							// })
+							const loginResu = await login(parames)
+							uni.showToast({
+								icon: 'none',
+								title: loginResu.message
+							})
+							if (loginResu.code == 200) {
+								uni.setStorageSync('token', loginResu.token)
+								uni.setStorageSync('userInfo', loginResu.user)
+							}
 						},
 						fail: function(err) {
 							uni.showToast({
 								icon: 'none',
-								title: '授权失败'
+								title: '登录失败'
 							})
 						}
 					})
@@ -117,6 +118,34 @@ export default {
 					uni.showToast({
 						icon: 'none',
 						title: '授权失败'
+					})
+				}
+			})
+		},
+		QQLogin(e) {
+			// qq登录
+			uni.login({
+				provider: 'qq',
+				success: async loginRes => {
+					let parames = {
+						code: loginRes.code,
+						rawData: e.detail.rawData,
+						provider: 'qq'
+					}
+					const loginResu = await login(parames)
+					uni.showToast({
+						icon: 'none',
+						title: loginResu.message
+					})
+					if (loginResu.code == 200) {
+						uni.setStorageSync('token', loginResu.token)
+						uni.setStorageSync('userInfo', loginResu.user)
+					}
+				},
+				fail: function(err) {
+					uni.showToast({
+						icon: 'none',
+						title: '登录失败'
 					})
 				}
 			})
@@ -169,5 +198,15 @@ export default {
 		font-size: 24rpx;
 		margin: 16rpx 0;
 	}
+}
+.login-button{
+	position: relative;
+	height: 150rpx;
+	width: 150rpx;
+	border-radius: 50%;
+	opacity: 0;
+	margin-top: -150rpx;
+	z-index: 99;
+	
 }
 </style>

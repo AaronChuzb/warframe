@@ -3,8 +3,8 @@
  * @LastEditors: AaronChu
  * @LastEditTime: 2021-09-25 01:21:42
  */
-const http = 'https://www.ourwarframe.com/app/api'
-// const http = 'http://localhost:3000/app/api'
+// const http = 'https://www.ourwarframe.com/app/api'
+const http = 'http://172.16.55.254:3000/app/api'
 const request = (url, data, method) =>{
   return new Promise((resolve, reject)=>{
     uni.request({
